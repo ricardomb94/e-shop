@@ -1,0 +1,15 @@
+{
+  "name": "e-shop",
+  "version": "1.0.0",
+  "description": "mon site e-commerce",
+  "main": "server.js",
+  "repository": "https://github.com/ricardomb94/e-shop.git",
+  "author": "Ricardo",
+  "license": "MIT",
+  "scripts": {
+    "start": "node backend/server"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
