@@ -4,12 +4,19 @@
   "description": "mon site e-commerce",
   "main": "server.js",
   "repository": "https://github.com/ricardomb94/e-shop.git",
-  "author": "Ricardo",
+  "author": "Ricardo M'BOUKOU",
   "license": "MIT",
   "scripts": {
-    "start": "node backend/server"
+    "start": "node backend/server",
+    "server": "nodemon backend/server",
+    "client": "yarn --cwd ./frontend run start",
+    "dev": "concurrently \"yarn run server\" \"yarn run client\""
   },
   "dependencies": {
     "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "concurrently": "^5.3.0",
+    "nodemon": "^2.0.6"
   }
 }

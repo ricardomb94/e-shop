@@ -64,5 +64,6 @@ Rating.propTypes = {
   text: PropTypes.string.isRequired,
   color: PropTypes.string,
 };
+// console.log(Rating.PropTypes.Rating);
 
 export default Rating;
