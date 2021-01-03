@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "mon site e-commerce",
   "main": "server.js",
+  "type": "module",
   "repository": "https://github.com/ricardomb94/e-shop.git",
   "author": "Ricardo M'BOUKOU",
   "license": "MIT",
