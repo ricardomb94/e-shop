@@ -35,13 +35,13 @@ const importData = async () => {
     process.exit(1);
   }
 };
-const destroData = async (async) => {
+const destroyData = async () => {
   try {
     await Order.deleteMany();
     await Product.deleteMany();
     await User.deleteMany();
 
-    console.log('Data destroyed!'.green.inverse);
+    console.log('Data Destroyed!'.yellow.inverse);
     process.exit();
   } catch (error) {
     console.error(`${error}`.red.inverse);
@@ -49,7 +49,7 @@ const destroData = async (async) => {
   }
 };
 
-if (process.argv[2] === 'd') {
+if (process.argv[2] === '-d') {
   destroyData();
 } else {
   importData();
