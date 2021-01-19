@@ -11,7 +11,7 @@ const Message = ({variant, children}) => {
     )
 }
 
-MessageChannel.defaultProps ={
+Message.defaultProps ={
     variant:'info',
 }
 

@@ -27,8 +27,8 @@ const HomeScreen = () => {
         <Message variant='danger'>{error}</Message> 
         ) : (
         <Row>
-          {products.map((product, i) => (
-            <Col sm={12} md={6} lg={3} key={i}>
+          {products.map((product) => (
+            <Col key={product._id} sm={12} md={6} lg={3} >
               <Product product={product} />
             </Col>
         ))}
