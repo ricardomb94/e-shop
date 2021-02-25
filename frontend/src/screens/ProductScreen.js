@@ -9,7 +9,7 @@ import Loader from '../components/Loader'
 import Message from '../components/Message';
 
 
-const ProductScreen = ({ history,match }) => {
+const ProductScreen = ({ history, match }) => {
 const [qty, setQty] = useState(0)
 
 const dispatch = useDispatch()
@@ -36,7 +36,7 @@ const addToCartHandler = () => {
       <Col md={6}>
         <Image src={product.image} alt={product.name} fluid />
       </Col>
-      <Col md={3}>
+      <Col l md={3}>
         <ListGroup variant="flush">
           <ListGroup.Item>
             <h3>{product.name}</h3>
