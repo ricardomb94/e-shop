@@ -25,6 +25,9 @@ const CartScreen = ({match, location, history}) => {
     const removeFromCartHandler = (id) => {
         console.log('Remove: ', )
     }
+    const checkoutHandler = () => {
+        history.push('/login?redirect=shipping')
+    }
 
     return <Row >
         <Col  md={8}>
@@ -72,12 +75,27 @@ const CartScreen = ({match, location, history}) => {
                 </ListGroup>
             )} 
         </Col>
-        <Col md={2}>
-                
+        <Col md={4}>
+            <Card>
+                <ListGroup variant='flush'>
+                    <ListGroup.Item>
+                        <h2>Sous Total({cartItems.reduce((acc, item) =>
+                            acc + item.qty, 0)
+                            }) Articles
+                        </h2>
+                        {cartItems
+                            .reduce((acc, item) => acc + item.qty * item.price, 0)
+                            .toFixed(2)}€
+                    </ListGroup.Item>
+                     <ListGroup.Item>
+                         <Button type='button' className='btn-block' disabled={cartItems.length === 0} onClick={checkoutHandler} 
+                         > 
+                            Veuillez valider commande
+                         </Button>
+                     </ListGroup.Item>   
+               </ListGroup>  
+            </Card>  
         </Col >
-        <Col md={2}>
-                
-        </Col>
     </Row>
        
     
