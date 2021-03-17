@@ -3,7 +3,7 @@ import asyncHandler from 'express-async-handler'
 import User from '../models/userModels.js'
 
 const protect = asyncHandler(async (req, res, next) => {
-  let token
+  let token;
 
   if (
     req.headers.authorization &&
@@ -20,7 +20,7 @@ const protect = asyncHandler(async (req, res, next) => {
     } catch (error) {
       console.error(error)
       res.status(401)
-      throw new Error('Not authorized, token failed')
+      throw new Error('Cette action n\'est pas autorisé, token')
     }
   }
 

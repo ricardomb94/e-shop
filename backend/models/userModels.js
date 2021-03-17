@@ -27,6 +27,7 @@ const userSchema = mongoose.Schema(
   }
 )
 
+//Compare the plain text Pw to the one that have been ashed to the DB
 userSchema.methods.matchPassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password)
 }

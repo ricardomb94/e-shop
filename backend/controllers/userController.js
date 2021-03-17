@@ -9,7 +9,9 @@ import User from '../models/userModels.js';
 const authUser = asyncHandler(async (req, res) =>{
     const {email, password} = req.body
 
+    //Find the user
     const user = await User.findOne({email})
+    //If the user exist we need to verify if the pw that been sent match the ashed one set in DB
     if(user && (await user.matchPassword(password))){
         res.json({
             _id: user._id,
@@ -18,6 +20,7 @@ const authUser = asyncHandler(async (req, res) =>{
             isAdmin: user.isAdmin,
             token: generateToken(user._id),
         })
+        //If the user doesn't exist or the user Pw doesn't match
     }else{
         res.status(401)
         throw new Error('Email ou mot de passe invalide')
