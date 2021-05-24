@@ -9,7 +9,12 @@ import User from '../models/userModels.js';
 const authUser = asyncHandler(async (req, res) =>{
     const {email, password} = req.body
 
+    //We are going to await and take our User Model and
+    //find one document by email
     const user = await User.findOne({email})
+
+    //Here we check if user exist and also if the password 
+    //that sent matches that user's password in db
     if(user && (await user.matchPassword(password))){
         res.json({
             _id: user._id,
@@ -18,6 +23,8 @@ const authUser = asyncHandler(async (req, res) =>{
             isAdmin: user.isAdmin,
             token: generateToken(user._id),
         })
+        //If user does not exist or password is incorrect
+        //We throw an error and return a JSON with status of 401
     }else{
         res.status(401)
         throw new Error('Email ou mot de passe invalide')
@@ -40,6 +47,11 @@ const getUserProfile = asyncHandler(async (req, res) =>{
         res.status(404)
     }
 })
+
+// const getUserProfile = asyncHandler(async (req, res) =>{
+//     res.send('Success')
+// })
+
 
 
 // @desc Register a new user
