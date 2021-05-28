@@ -31,7 +31,7 @@ const LoginScreen = ({location, history}) => {
     }
     return (
         <FormContainer>
-            <h1>Sign In</h1>
+            <h1>Connxion</h1>
             {error && <Message variant='danger'>{error}</Message>}
             {loading && <Loader />}
             <Form onSubmit={submitHandler}>
@@ -39,7 +39,7 @@ const LoginScreen = ({location, history}) => {
                 <Form.Label>Adresse E-mail</Form.Label>
                 <Form.Control 
                     type='email' 
-                    plaholder='Renseignez votre e-mail'
+                    placeholder='Renseignez votre e-mail'
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     >
