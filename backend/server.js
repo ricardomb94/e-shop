@@ -13,6 +13,7 @@ dotenv.config();
 
 const app = express();
 
+//That will allow us to accept JSON data in the body
 app.use(express.json())
 
 app.use(morgan('dev'));
