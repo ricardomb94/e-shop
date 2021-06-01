@@ -9,7 +9,7 @@ import User from '../models/userModels.js';
 const authUser = asyncHandler(async (req, res) =>{
     const {email, password} = req.body
 
-    //Find the user
+    //Find the user: let's data from the body
     const user = await User.findOne({email})
     //If the user exist we need to verify if the pw that been sent match the ashed one set in DB
     if(user && (await user.matchPassword(password))){
