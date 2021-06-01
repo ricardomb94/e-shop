@@ -36,7 +36,7 @@ const addToCartHandler = () => {
       <Col md={6}>
         <Image src={product.image} alt={product.name} fluid />
       </Col>
-      <Col l md={3}>
+      <Col md={3}>
         <ListGroup variant="flush">
           <ListGroup.Item>
             <h3>{product.name}</h3>
