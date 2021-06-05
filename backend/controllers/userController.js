@@ -106,7 +106,7 @@ const updateUserProfile = asyncHandler(async (req, res) =>{
         })
     } else{
         res.status(404)
-        throw new error('User not found')
+        throw new error('Cet utilisateur n\'existe pas')
     }
 })
 
