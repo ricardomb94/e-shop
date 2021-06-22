@@ -1,15 +1,18 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { Button, Row, Col, ListGroup, Image, Card } from "react-bootstrap";
+import { Button, Card, Col, Image, ListGroup, Row } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Message from "../components/Message";
-import CheckoutSteps from "../components/CheckoutSteps";
 
-const PlaceOrderScreen = () => {
-  const cart = useSelector((state) => state.cart);
+import CheckoutSteps from "../components/CheckoutSteps";
+import { Link } from "react-router-dom";
+import Message from "../components/Message";
+import { createOrder } from "../actions/orderActions";
+
+const PlaceOrderScreen = ({ history }) => {
+  const dispatch = useDispatch();
+  const cart = useSelector(state => state.cart);
 
   //Calculate Prices
-  const addDecimals = (num) => {
+  const addDecimals = num => {
     return (Math.round(num * 100) / 100).toFixed(2);
   };
 
@@ -24,8 +27,26 @@ const PlaceOrderScreen = () => {
     Number(cart.taxPrice)
   ).toFixed(2);
 
+  const orderCReate = useSelector(state => state.orderCreate);
+  const { order, success, error } = order;
+
+  useEffect(() => {
+    if (success) {
+      history.push(`/order/${order._id}`);
+    }
+  });
+
   const placeOrderHandler = () => {
-    console.log("order");
+    dispatch(
+      createOrder({
+        orderItems: cart.cartItems,
+        shippingAddress: cart.shippingAddress,
+        paymentMethod: cart.paymentMethod,
+        itemsPrice: cart.itemsPrice,
+        shippingPrice: cart.shippingPrice,
+        taxPrice: cart.taxPrice
+      })
+    );
   };
   return (
     <>
