@@ -5,7 +5,7 @@ import FormContainer from "../components/FormContainer";
 import CheckoutSteps from "../components/CheckoutSteps";
 import { savePaymentMethod } from "../actions/cartActions";
 
-const PayementScreen = ({ history }) => {
+const PaymentScreen = ({ history }) => {
   const cart = useSelector((state) => state.cart);
   const { shippingAddress } = cart;
 
@@ -13,13 +13,13 @@ const PayementScreen = ({ history }) => {
     history.push("shipping");
   }
 
-  const [payementMethod, setPayementMethod] = useState("PayPal");
+  const [paymentMethod, setPaymentMethod] = useState("PayPal");
 
   const dispatch = useDispatch();
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(savePaymentMethod(payementMethod));
+    dispatch(savePaymentMethod(paymentMethod));
     history.push("/placeorder");
   };
 
@@ -36,17 +36,17 @@ const PayementScreen = ({ history }) => {
               type="radio"
               label="PayPal or Credit Card"
               id="PayPal"
-              name="payementMethod"
+              name="paymentMethod"
               value="PayPal"
-              onChange={(e) => setPayementMethod(e.target.value)}
+              onChange={(e) => setPaymentMethod(e.target.value)}
             ></Form.Check>
             {/* <Form.Check
               type="radio"
               label="Stripe"
               id="Stripe"
-              name="payementMethod"
+              name="paymentMethod"
               value="Stripe"
-              onChange={(e) => setPayementMethod(e.target.value)}
+              onChange={(e) => setPaymentMethod(e.target.value)}
             ></Form.Check> */}
           </Col>
         </Form.Group>
@@ -58,4 +58,4 @@ const PayementScreen = ({ history }) => {
   );
 };
 
-export default PayementScreen;
+export default PaymentScreen;
