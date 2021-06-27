@@ -40,4 +40,22 @@ const addOrderItems = asyncHandler(async (req, res) => {
   }
 });
 
-export { addOrderItems };
+// @desc   GET order by ID
+// @route GET /api/orders/;id
+// @ccess Private
+
+//To create a new order, we gonna get some informations from the body
+const getOrderById = asyncHandler(async (req, res) => {
+  const order = await Order.findById(req.params.id).populate(
+    "user",
+    "name email"
+  );
+  if (order) {
+    res.json(order);
+  } else {
+    res.status(404);
+    throw new Error("Votre commande n'a pas abouti");
+  }
+});
+
+export { addOrderItems, getOrderById };
