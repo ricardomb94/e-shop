@@ -1,20 +1,22 @@
 import { applyMiddleware, combineReducers, createStore } from "redux";
 import {
+  orderCreateReducer,
+  orderDetailsReducer,
+  orderPayReducer
+} from "./reducers/orderReducers";
+import {
   productDetailsReducer,
-  productListReducer,
+  productListReducer
 } from "./reducers/productReducer";
 import {
   userDetailsReducer,
   userLoginReducer,
   userRegisterReducer,
-  userUpdateProfileReducer,
+  userUpdateProfileReducer
 } from "./reducers/userReducer";
+
 import { cartReducer } from "./reducers/cartReducer";
 import { composeWithDevTools } from "redux-devtools-extension";
-import {
-  orderCreateReducer,
-  orderDetailsReducer,
-} from "./reducers/orderReducers";
 import thunk from "redux-thunk";
 
 const reducer = combineReducers({
@@ -27,6 +29,7 @@ const reducer = combineReducers({
   userUpdateProfile: userUpdateProfileReducer,
   orderCreate: orderCreateReducer,
   orderDetails: orderDetailsReducer,
+  orderPay: orderPayReducer
 });
 
 const cartItemsFromStorage = localStorage.getItem("cartItems")
@@ -43,11 +46,11 @@ const shippingAddressFromStorage = localStorage.getItem("shippingAddress")
 const initialState = {
   cart: {
     cartItems: cartItemsFromStorage,
-    shippingAddress: shippingAddressFromStorage,
+    shippingAddress: shippingAddressFromStorage
   },
   userLogin: { userInfo: userInfoFromStorage },
   userRegister: { userInfo: userInfoFromStorage },
-  userDetails: { userInfo: userInfoFromStorage },
+  userDetails: { userInfo: userInfoFromStorage }
 };
 
 const middleware = [thunk];
