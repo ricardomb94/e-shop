@@ -2,7 +2,7 @@ import {
   addOrderItems,
   getMyOrders,
   getOrderById,
-  updateOrderToPaid
+  updateOrderToPaid,
 } from "../controllers/orderController.js";
 
 import express from "express";

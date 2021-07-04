@@ -17,21 +17,21 @@ const OrderScreen = ({ match, history }) => {
 
   const dispatch = useDispatch();
 
-  const orderDetails = useSelector(state => state.orderDetails);
+  const orderDetails = useSelector((state) => state.orderDetails);
   const { order, loading, error } = orderDetails;
 
-  const orderPay = useSelector(state => state.orderPay);
+  const orderPay = useSelector((state) => state.orderPay);
   const { loading: loadingPay, success: successPay } = orderPay;
 
   // const orderDeliver = useSelector(state => state.orderDeliver);
   // const { loading: loadingDeliver, success: successDeliver } = orderDeliver;
 
-  const userLogin = useSelector(state => state.userLogin);
+  const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
   if (!loading) {
     //   Calculate prices
-    const addDecimals = num => {
+    const addDecimals = (num) => {
       return (Math.round(num * 100) / 100).toFixed(2);
     };
 
@@ -70,7 +70,7 @@ const OrderScreen = ({ match, history }) => {
     }
   }, [dispatch, userInfo, history, orderId, order, successPay]);
 
-  const successPaymentHandler = paymentResult => {
+  const successPaymentHandler = (paymentResult) => {
     console.log(paymentResult);
     dispatch(payOrder(orderId, paymentResult));
   };
