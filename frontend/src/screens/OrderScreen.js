@@ -2,10 +2,10 @@ import { Card, Col, Image, ListGroup, Row } from "react-bootstrap";
 import React, { useEffect, useState } from "react";
 import { getOrderDetails, payOrder } from "../actions/orderActions";
 import { useDispatch, useSelector } from "react-redux";
-
 import { Link } from "react-router-dom";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
+import {} from "../actions/orderActions";
 import { ORDER_PAY_RESET } from "../constants/orderConstants";
 import { PayPalButton } from "react-paypal-button-v2";
 import axios from "axios";
@@ -19,6 +19,7 @@ const OrderScreen = ({ match, history }) => {
 
   const orderDetails = useSelector((state) => state.orderDetails);
   const { order, loading, error } = orderDetails;
+  console.log("ORDER :", orderDetails);
 
   const orderPay = useSelector((state) => state.orderPay);
   const { loading: loadingPay, success: successPay } = orderPay;
