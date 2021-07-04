@@ -1,12 +1,13 @@
+import { Button, Col, Form } from "react-bootstrap";
 import React, { useState } from "react";
-import { Form, Button, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import FormContainer from "../components/FormContainer";
+
 import CheckoutSteps from "../components/CheckoutSteps";
+import FormContainer from "../components/FormContainer";
 import { savePaymentMethod } from "../actions/cartActions";
 
 const PaymentScreen = ({ history }) => {
-  const cart = useSelector((state) => state.cart);
+  const cart = useSelector(state => state.cart);
   const { shippingAddress } = cart;
 
   if (!shippingAddress) {
@@ -17,7 +18,7 @@ const PaymentScreen = ({ history }) => {
 
   const dispatch = useDispatch();
 
-  const submitHandler = (e) => {
+  const submitHandler = e => {
     e.preventDefault();
     dispatch(savePaymentMethod(paymentMethod));
     history.push("/placeorder");
@@ -38,15 +39,15 @@ const PaymentScreen = ({ history }) => {
               id="PayPal"
               name="payementMethod"
               value="PayPal"
-              onChange={(e) => setPaymentMethod(e.target.value)}
+              onChange={e => setPaymentMethod(e.target.value)}
             ></Form.Check>
             {/* <Form.Check
               type="radio"
               label="Stripe"
               id="Stripe"
-              name="payementMethod"
+              name="paymentMethod"
               value="Stripe"
-              onChange={(e) => setPayementMethod(e.target.value)}
+              onChange={(e) => setPaymentMethod(e.target.value)}
             ></Form.Check> */}
           </Col>
         </Form.Group>

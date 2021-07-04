@@ -1,4 +1,4 @@
-import { Button, Card, Col, Image, ListGroup, Row } from "react-bootstrap";
+import { Card, Col, Image, ListGroup, Row } from "react-bootstrap";
 import React, { useEffect, useState } from "react";
 import { getOrderDetails, payOrder } from "../actions/orderActions";
 import { useDispatch, useSelector } from "react-redux";
@@ -23,8 +23,8 @@ const OrderScreen = ({ match, history }) => {
   const orderPay = useSelector(state => state.orderPay);
   const { loading: loadingPay, success: successPay } = orderPay;
 
-  //   const orderDeliver = useSelector((state) => state.orderDeliver);
-  //   const { loading: loadingDeliver, success: successDeliver } = orderDeliver;
+  // const orderDeliver = useSelector(state => state.orderDeliver);
+  // const { loading: loadingDeliver, success: successDeliver } = orderDeliver;
 
   const userLogin = useSelector(state => state.userLogin);
   const { userInfo } = userLogin;

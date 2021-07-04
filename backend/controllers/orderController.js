@@ -1,5 +1,5 @@
-import asyncHandler from "express-async-handler";
 import Order from "../models/orderModels.js";
+import asyncHandler from "express-async-handler";
 
 // @desc Fetch Create new order
 // @route GET /api/orders/
@@ -14,7 +14,7 @@ const addOrderItems = asyncHandler(async (req, res) => {
     ItemsPrice,
     taxPrice,
     shippingPrice,
-    totalPrice,
+    totalPrice
   } = req.body;
 
   //Let's make sure that the order is not empty
@@ -32,7 +32,7 @@ const addOrderItems = asyncHandler(async (req, res) => {
       ItemsPrice,
       taxPrice,
       shippingPrice,
-      totalPrice,
+      totalPrice
     });
     //once the order is instanciate we can save it in DB
     const createdOrder = await order.save();
@@ -69,7 +69,7 @@ const updateOrderToPaid = asyncHandler(async (req, res) => {
     order.paymentResult = {
       id: req.body.id,
       status: req.body.update_time,
-      email_address: req.body.payer.email_address,
+      email_address: req.body.payer.email_address
     };
 
     const updatedOrder = await order.save();
@@ -80,4 +80,12 @@ const updateOrderToPaid = asyncHandler(async (req, res) => {
   }
 });
 
-export { addOrderItems, getOrderById, updateOrderToPaid };
+// @desc   Get logged in user orders
+// @route GET /api/orders/myorders
+// @ccess Private
+const getMyOrders = asyncHandler(async (req, res) => {
+  const orders = await Order.find({ user: req.user._id });
+  res.json(orders);
+});
+
+export { addOrderItems, getOrderById, updateOrderToPaid, getMyOrders };
