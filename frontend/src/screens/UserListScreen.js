@@ -1,11 +1,11 @@
 import { Button, Table } from "react-bootstrap";
 import React, { useEffect } from "react";
+import { deleteUser, listUsers } from "../actions/usersActions";
 import { useDispatch, useSelector } from "react-redux";
 
 import { LinkContainer } from "react-router-bootstrap";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
-import { listUsers } from "../actions/usersActions";
 
 const UserListScreen = ({ history }) => {
   const dispatch = useDispatch();
@@ -16,8 +16,8 @@ const UserListScreen = ({ history }) => {
   const userLogin = useSelector(state => state.userLogin);
   const { userInfo } = userLogin;
 
-  // const userDelete = useSelector(state => state.userDelete);
-  // const { success: successDelete } = userDelete;
+  const userDelete = useSelector(state => state.userDelete);
+  const { success: successDelete } = userDelete;
 
   useEffect(() => {
     if (userInfo && userInfo.isAdmin) {
@@ -25,17 +25,17 @@ const UserListScreen = ({ history }) => {
     } else {
       history.push("/login");
     }
-  }, [dispatch, history, userInfo]);
+  }, [dispatch, history, userInfo, successDelete]);
 
-  // const deleteHandler = id => {
-  //   if (window.confirm("Are you sure")) {
-  //     dispatch(deleteUser(id));
-  //   }
-  // };
+  const deleteHandler = id => {
+    if (window.confirm("Êtes-vous sûre?")) {
+      dispatch(deleteUser(id));
+    }
+  };
 
   return (
     <>
-      <h1>Users</h1>
+      <h1>Clients</h1>
       {loading ? (
         <Loader />
       ) : error ? (
@@ -45,7 +45,7 @@ const UserListScreen = ({ history }) => {
           <thead>
             <tr>
               <th>ID</th>
-              <th>NAME</th>
+              <th>NOM</th>
               <th>EMAIL</th>
               <th>ADMIN</th>
               <th></th>
@@ -75,7 +75,7 @@ const UserListScreen = ({ history }) => {
                   <Button
                     variant="danger"
                     className="btn-sm"
-                    // onClick={() => deleteHandler(user._id)}
+                    onClick={() => deleteHandler(user._id)}
                   >
                     <i className="fas fa-trash"></i>
                   </Button>
