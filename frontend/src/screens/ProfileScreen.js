@@ -1,14 +1,3 @@
-<<<<<<< HEAD
-import React, { useState, useEffect } from 'react'
-import { Form, Button, Row, Col } from 'react-bootstrap'
-// import { LinkContainer } from 'react-router-bootstrap'
-import { useDispatch, useSelector } from 'react-redux'
-import Message from '../components/Message'
-import Loader from '../components/Loader'
-import { getUserDetails,updateUserProfile } from '../actions/usersActions'
-// import { listMyOrders } from '../actions/orderActions'
-//  import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstants'
-=======
 import { Button, Col, Form, Row, Table } from "react-bootstrap";
 import React, { useEffect, useState } from "react";
 import { getUserDetails, updateUserProfile } from "../actions/usersActions";
@@ -19,7 +8,6 @@ import Loader from "../components/Loader";
 import Message from "../components/Message";
 import { USER_UPDATE_PROFILE_RESET } from "../constants/userConstants";
 import { listMyOrders } from "../actions/orderActions";
->>>>>>> main
 
 const ProfileScreen = ({ location, history }) => {
   const [name, setName] = useState("");
@@ -30,22 +18,16 @@ const ProfileScreen = ({ location, history }) => {
 
   const dispatch = useDispatch();
 
-  const userDetails = useSelector(state => state.userDetails);
+  const userDetails = useSelector((state) => state.userDetails);
   const { loading, error, user } = userDetails;
 
-  const userLogin = useSelector(state => state.userLogin);
+  const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
-<<<<<<< HEAD
-  const updateUserProfile = useSelector((state) => state.updateUserProfile)
-  const { success } = updateUserProfile
-
-=======
-  const userUpdateProfile = useSelector(state => state.userUpdateProfile);
+  const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
   const { success } = userUpdateProfile;
->>>>>>> main
 
-  const orderListMy = useSelector(state => state.orderListMy);
+  const orderListMy = useSelector((state) => state.orderListMy);
   const { loading: loadingOrders, error: errorOrders, orders } = orderListMy;
 
   useEffect(() => {
@@ -61,22 +43,14 @@ const ProfileScreen = ({ location, history }) => {
         setEmail(user.email);
       }
     }
-<<<<<<< HEAD
-  }, [dispatch, history, userInfo, user, success])
-=======
   }, [dispatch, history, userInfo, user, success]);
->>>>>>> main
 
-  const submitHandler = e => {
+  const submitHandler = (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
       setMessage("Passwords do not match");
     } else {
-<<<<<<< HEAD
-      dispatch(updateUserProfile({ id: user._id, name, email, password }))
-=======
       dispatch(updateUserProfile({ id: user._id, name, email, password }));
->>>>>>> main
     }
   };
 
@@ -86,13 +60,9 @@ const ProfileScreen = ({ location, history }) => {
         <h2>Mon Profile</h2>
         {message && <Message variant="danger">{message}</Message>}
         {}
-<<<<<<< HEAD
-        {success && <Message variant='success'>Profile modifié avec succès</Message>}
-=======
         {success && (
           <Message variant="success">Profile modifié avec succès</Message>
         )}
->>>>>>> main
         {loading ? (
           <Loader />
         ) : error ? (
@@ -105,7 +75,7 @@ const ProfileScreen = ({ location, history }) => {
                 type="name"
                 placeholder="Votre nom"
                 value={name}
-                onChange={e => setName(e.target.value)}
+                onChange={(e) => setName(e.target.value)}
               ></Form.Control>
             </Form.Group>
 
@@ -115,7 +85,7 @@ const ProfileScreen = ({ location, history }) => {
                 type="email"
                 placeholder="Votre email"
                 value={email}
-                onChange={e => setEmail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value)}
               ></Form.Control>
             </Form.Group>
 
@@ -125,7 +95,7 @@ const ProfileScreen = ({ location, history }) => {
                 type="password"
                 placeholder="Votre mot de passe"
                 value={password}
-                onChange={e => setPassword(e.target.value)}
+                onChange={(e) => setPassword(e.target.value)}
               ></Form.Control>
             </Form.Group>
 
@@ -135,7 +105,7 @@ const ProfileScreen = ({ location, history }) => {
                 type="password"
                 placeholder="Confirmez votre mot de passe"
                 value={confirmPassword}
-                onChange={e => setConfirmPassword(e.target.value)}
+                onChange={(e) => setConfirmPassword(e.target.value)}
               ></Form.Control>
             </Form.Group>
 
@@ -164,7 +134,7 @@ const ProfileScreen = ({ location, history }) => {
               </tr>
             </thead>
             <tbody>
-              {orders.map(order => (
+              {orders.map((order) => (
                 <tr key={order._id}>
                   <td>{order._id}</td>
                   <td>{order.createdAt.substring(0, 10)}</td>

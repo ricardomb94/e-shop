@@ -1,22 +1,13 @@
-<<<<<<< HEAD
-import {createStore, combineReducers, applyMiddleware} from 'redux';
-import thunk from 'redux-thunk';
-import {composeWithDevTools} from 'redux-devtools-extension';
-import {productListReducer, productDetailsReducer} from './reducers/productReducer';
-import { cartReducer } from './reducers/cartReducer';
-import {userLoginReducer, userRegisterReducer, userDetailsReducer, updateUserProfileReducer} from './reducers/userReducer'
-
-=======
 import { applyMiddleware, combineReducers, createStore } from "redux";
 import {
   orderCreateReducer,
   orderDetailsReducer,
   orderLisMyReducer,
-  orderPayReducer
+  orderPayReducer,
 } from "./reducers/orderReducers";
 import {
   productDetailsReducer,
-  productListReducer
+  productListReducer,
 } from "./reducers/productReducer";
 import {
   userDeleteReducer,
@@ -24,24 +15,14 @@ import {
   userListReducer,
   userLoginReducer,
   userRegisterReducer,
-  userUpdateProfileReducer
+  userUpdateProfileReducer,
 } from "./reducers/userReducer";
->>>>>>> main
 
 import { cartReducer } from "./reducers/cartReducer";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 
 const reducer = combineReducers({
-<<<<<<< HEAD
-    productList: productListReducer,
-    productDetails: productDetailsReducer,
-    cart: cartReducer,
-    userLogin: userLoginReducer,
-    userRegister: userRegisterReducer,
-    userDetails: userDetailsReducer,
-    updateUserProfile: updateUserProfileReducer,
-=======
   productList: productListReducer,
   productDetails: productDetailsReducer,
   cart: cartReducer,
@@ -54,8 +35,7 @@ const reducer = combineReducers({
   orderCreate: orderCreateReducer,
   orderDetails: orderDetailsReducer,
   orderPay: orderPayReducer,
-  orderListMy: orderLisMyReducer
->>>>>>> main
+  orderListMy: orderLisMyReducer,
 });
 
 const cartItemsFromStorage = localStorage.getItem("cartItems")
@@ -72,11 +52,11 @@ const shippingAddressFromStorage = localStorage.getItem("shippingAddress")
 const initialState = {
   cart: {
     cartItems: cartItemsFromStorage,
-    shippingAddress: shippingAddressFromStorage
+    shippingAddress: shippingAddressFromStorage,
   },
   userLogin: { userInfo: userInfoFromStorage },
   userRegister: { userInfo: userInfoFromStorage },
-  userDetails: { userInfo: userInfoFromStorage }
+  userDetails: { userInfo: userInfoFromStorage },
 };
 
 const middleware = [thunk];
