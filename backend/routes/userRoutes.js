@@ -6,8 +6,8 @@ import {
   getUserProfile,
   getUsers,
   registerUser,
-  updateUser,
-  updateUserProfile
+  updateUserProfile,
+  updateUser
 } from "../controllers/userController.js";
 
 import express from "express";
