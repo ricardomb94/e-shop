@@ -49,7 +49,7 @@ const UserEditScreen = ({ match, history }) => {
 
   useEffect(() => {
     
-  }, [user])
+  }, [])
 
   const submitHandler = (e) => {
     e.preventDefault()
