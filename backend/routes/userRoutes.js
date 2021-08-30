@@ -5,7 +5,8 @@ import {
   getUserProfile,
   getUsers,
   registerUser,
-  updateUserProfile
+  updateUserProfile,
+  updateUser
 } from "../controllers/userController.js";
 
 import express from "express";
@@ -18,6 +19,10 @@ router
   .route("/profile")
   .get(protect, getUserProfile)
   .put(protect, updateUserProfile);
-router.route("/:id").delete(protect, admin, deleteUser);
+router.route("/:id").delete(protect, admin, deleteUser)
+  .get(protect, admin)
+  .put(protect, admin, updateUser)
+
+  
 
 export default router;

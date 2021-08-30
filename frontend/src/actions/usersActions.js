@@ -21,6 +21,9 @@ import {
   USER_UPDATE_PROFILE_REQUEST,
   USER_UPDATE_PROFILE_RESET,
   USER_UPDATE_PROFILE_SUCCESS,
+  USER_UPDATE_SUCCESS,
+  USER_UPDATE_REQUEST,
+  USER_UPDATE_FAIL,
 } from "../constants/userConstants";
 
 import { ORDER_LIST_MY_RESET } from "../constants/orderConstants";
@@ -116,7 +119,7 @@ export const register = (name, email, password) => async (dispatch) => {
 /*
  * DETAILS
  */
-export const getUserDetails = (id) => async (dispatch, getState) => {
+export const getUserDetails = (id, user) => async (dispatch, getState) => {
   try {
     dispatch({
       type: USER_DETAILS_REQUEST,
@@ -129,12 +132,11 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
 
     const config = {
       headers: {
-        "Content-Type": "application/json",
+        // "Content-Type": "application/json",
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
-    const { data } = await axios.get(`/api/users/${id}`, config);
-    console.log(data);
+    const { data } = await axios.get(`/api/users/${id}`, user,config);
 
     dispatch({
       type: USER_DETAILS_SUCCESS,
@@ -278,6 +280,43 @@ export const deleteUser = (id) => async (dispatch, getState) => {
     }
     dispatch({
       type: USER_DELETE_FAIL,
+      payload: message,
+    });
+  }
+};
+/**
+ * UPDATE USER
+ */
+export const updateUser = (user) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: USER_UPDATE_REQUEST,
+    });
+    //Let's access user info
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        'Content-type': 'application/json',
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+    /*To fetch the data in the backend we will make a delete request to the api
+      users and pass in the id
+    */
+   const { data } = await axios.put(`/api/users/${user._id}`, user, config);
+
+    dispatch({type: USER_UPDATE_SUCCESS, payload: data});
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+   
+    dispatch({
+      type: USER_UPDATE_FAIL,
       payload: message,
     });
   }
