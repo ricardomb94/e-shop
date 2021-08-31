@@ -17,13 +17,12 @@ import {
   USER_REGISTER_FAIL,
   USER_REGISTER_REQUEST,
   USER_REGISTER_SUCCESS,
+  USER_UPDATE_FAIL,
   USER_UPDATE_PROFILE_FAIL,
   USER_UPDATE_PROFILE_REQUEST,
-  USER_UPDATE_PROFILE_RESET,
   USER_UPDATE_PROFILE_SUCCESS,
-  USER_UPDATE_SUCCESS,
   USER_UPDATE_REQUEST,
-  USER_UPDATE_FAIL,
+  USER_UPDATE_SUCCESS
 } from "../constants/userConstants";
 
 import { ORDER_LIST_MY_RESET } from "../constants/orderConstants";
@@ -119,45 +118,42 @@ export const register = (name, email, password) => async (dispatch) => {
 /*
  * DETAILS
  */
-export const getUserDetails = (id, user) => async (dispatch, getState) => {
+export const getUserDetails = (id) => async (dispatch, getState) => {
   try {
     dispatch({
       type: USER_DETAILS_REQUEST,
-    });
+    })
 
-    //That gives us access to login object
     const {
       userLogin: { userInfo },
-    } = getState();
+    } = getState()
 
     const config = {
       headers: {
-        // "Content-Type": "application/json",
         Authorization: `Bearer ${userInfo.token}`,
       },
-    };
-    const { data } = await axios.get(`/api/users/${id}`, user,config);
+    }
+
+    const { data } = await axios.get(`/api/users/${id}`, config)
 
     dispatch({
       type: USER_DETAILS_SUCCESS,
       payload: data,
-    });
-
-    dispatch({
-      type: USER_UPDATE_PROFILE_RESET,
-      payload: data,
-    });
+    })
   } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message
+    if (message === 'Not authorized, token failed') {
+      dispatch(logout())
+    }
     dispatch({
       type: USER_DETAILS_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
-    });
+      payload: message,
+    })
   }
-};
-
+}
 /*
  * UPDATE USER PROFILE
  */
@@ -264,11 +260,11 @@ export const deleteUser = (id) => async (dispatch, getState) => {
     /*To fetch the data in the backend we will make a delete request to the api
       users and pass in the id
     */
-   await axios.delete(`/api/users/${id}`, config);
+    await axios.delete(`/api/users/${id}`, config);
 
     dispatch({
       type: USER_DELETE_SUCCESS,
-      // payload: data,
+
     });
   } catch (error) {
     const message =
@@ -284,40 +280,46 @@ export const deleteUser = (id) => async (dispatch, getState) => {
     });
   }
 };
-/**
+
+
+/*
  * UPDATE USER
  */
-export const updateUser = (user) => async (dispatch, getState) => {
+export const updateUser = user => async (dispatch, getState) => {
   try {
     dispatch({
       type: USER_UPDATE_REQUEST,
-    });
-    //Let's access user info
+    })
+
     const {
       userLogin: { userInfo },
-    } = getState();
+    } = getState()
 
     const config = {
       headers: {
-        'Content-type': 'application/json',
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${userInfo.token}`,
       },
-    };
-    /*To fetch the data in the backend we will make a delete request to the api
-      users and pass in the id
-    */
-   const { data } = await axios.put(`/api/users/${user._id}`, user, config);
+    }
 
-    dispatch({type: USER_UPDATE_SUCCESS, payload: data});
+    const { data } = await axios.put(`/api/users/${user._id}`, user, config)
+
+    dispatch({ type: USER_UPDATE_SUCCESS })
+
+    dispatch({ type: USER_DETAILS_SUCCESS, payload: data })
+
+    dispatch({ type: USER_DETAILS_RESET })
   } catch (error) {
     const message =
       error.response && error.response.data.message
         ? error.response.data.message
-        : error.message;
-   
+        : error.message
+    if (message === 'Not authorized, token failed') {
+      dispatch(logout())
+    }
     dispatch({
       type: USER_UPDATE_FAIL,
       payload: message,
-    });
+    })
   }
-};
+}

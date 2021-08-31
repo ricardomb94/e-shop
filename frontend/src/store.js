@@ -31,7 +31,7 @@ const reducer = combineReducers({
   userRegister: userRegisterReducer,
   userDetails: userDetailsReducer,
   userUpdateProfile: userUpdateProfileReducer,
-  userUpdate: userUpdateReducer,
+  userUpdate:userUpdateReducer,
   userList: userListReducer,
   userDelete: userDeleteReducer,
   orderCreate: orderCreateReducer,
@@ -51,6 +51,7 @@ const userInfoFromStorage = localStorage.getItem("userInfo")
 const shippingAddressFromStorage = localStorage.getItem("shippingAddress")
   ? JSON.parse(localStorage.getItem("shippingAddress"))
   : {};
+
 const initialState = {
   cart: {
     cartItems: cartItemsFromStorage,
