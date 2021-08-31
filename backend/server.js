@@ -11,24 +11,31 @@ import userRoutes from "./routes/userRoutes.js";
 
 dotenv.config();
 
+connectDB();
+
 const app = express();
+
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'))
+}
 
 //That will allow us to accept JSON data in the body
 app.use(express.json());
 
-app.use(morgan("dev"));
+// parse requests of content-type - application/x-www-form-urlencoded
+ app.use(express.urlencoded({extended:true}))
 
-connectDB();
+ //Monted routes
+app.use("/api/products", productRoutes);
+app.use("/api/users", userRoutes);
+app.use("/api/orders", orderRoutes);
 
 //Routes
 app.get("/", (req, res) => {
   res.send("API is running...");
 });
 
-//Monted routes
-app.use("/api/products", productRoutes);
-app.use("/api/users", userRoutes);
-app.use("/api/orders", orderRoutes);
+
 
 //When we pay we will hit this route and Fetch the Paypal client id
 app.get("/api/config/paypal", (req, res) =>
