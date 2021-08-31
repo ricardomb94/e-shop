@@ -5,16 +5,16 @@ const users = [
     name: 'Admin User',
     email: 'admin@example.com',
     password: bcrypt.hashSync('1234567', 10),
-    isAdmin: true,
   },
   {
     name: 'Rcardo MB',
-    email: 'ricardo@.com',
+    email: 'ricardomb@gmail.com',
     password: bcrypt.hashSync('1234567', 10),
+    isAdmin: true,
   },
   {
     name: 'Aymard M',
-    email: 'aymard@.com',
+    email: 'aymard@gmail.com',
     password: bcrypt.hashSync('1234567', 10),
   },
 ];
