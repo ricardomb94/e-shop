@@ -1,6 +1,6 @@
 import { Button, Table, Row, Col } from "react-bootstrap";
 import React, { useEffect } from "react";
-import { listProducts } from "../actions/productActions";
+import { listProducts, deleteProduct } from "../actions/productActions";
 import { useDispatch, useSelector } from "react-redux";
 
 import { LinkContainer } from "react-router-bootstrap";
@@ -13,8 +13,16 @@ const ProductListScreen = ({ history, match }) => {
   const productList = useSelector(state => state.productList);
   const { loading, error, products } = productList;
 
+  const productDelete= useSelector(state => state.productDelete);
+  const {
+    loading: loadingDelete,
+    success: successDelete,
+    error: errorDelete,
+  } = productDelete;
+
   const userLogin = useSelector(state => state.userLogin);
   const { userInfo } = userLogin;
+
 
   
 
@@ -24,11 +32,11 @@ const ProductListScreen = ({ history, match }) => {
     } else {
       history.push("/login");
     }
-  }, [dispatch, history, userInfo, ]);
+  }, [dispatch, history, userInfo, successDelete]);
 
   const deleteHandler = id => {
     if (window.confirm("Êtes-vous sûre?")) {
-     //DELETE PRODUCTS
+     dispatch(deleteProduct(id));
     }
   };
 
@@ -48,6 +56,8 @@ const ProductListScreen = ({ history, match }) => {
             </Button>
         </Col>
     </Row>
+    {loadingDelete && <Loader />}
+    {errorDelete && <Message variant="danger">{errorDelete}</Message>}
       {loading ? (
         <Loader />
       ) : error ? (
