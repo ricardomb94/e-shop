@@ -1,10 +1,11 @@
-import React, {useState, useEffect} from 'react'
-import {Link} from 'react-router-dom'
-import {Form, Button, Row, Col} from 'react-bootstrap'
+import {Button, Col, Form, Row} from 'react-bootstrap'
+import React, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import Message from '../components/Message'
-import Loader from '../components/Loader'
+
 import FormContainer from '../components/FormContainer'
+import {Link} from 'react-router-dom'
+import Loader from '../components/Loader'
+import Message from '../components/Message'
 import {login} from '../actions/usersActions'
 
 const LoginScreen = ({location, history}) => {
@@ -20,7 +21,7 @@ const LoginScreen = ({location, history}) => {
     const redirect = location.search ? location.search.split('=')[1]: '/'
     useEffect(() => {
         if (userInfo){
-           history.push(redirect) 
+           history.push(redirect)
         }
 
     }, [history, userInfo, redirect])
@@ -31,31 +32,31 @@ const LoginScreen = ({location, history}) => {
     }
     return (
         <FormContainer>
-            <h1>Connxion</h1>
+            <h1>Connexion</h1>
             {error && <Message variant='danger'>{error}</Message>}
             {loading && <Loader />}
             <Form onSubmit={submitHandler}>
                 <Form.Group controlId='email'>
                 <Form.Label>Adresse E-mail</Form.Label>
-                <Form.Control 
-                    type='email' 
+                <Form.Control
+                    type='email'
                     placeholder='Renseignez votre e-mail'
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     >
-                    </Form.Control> 
+                    </Form.Control>
                 </Form.Group>
 
                  <Form.Group controlId='password'>
                 <Form.Label>Mot de passe</Form.Label>
-                <Form.Control 
+                <Form.Control
 
-                    type='password' 
+                    type='password'
                     plaholder='Renseignez votre mot de passe'
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     >
-                    </Form.Control> 
+                    </Form.Control>
                 </Form.Group>
                 <Button type='submit' variant='primary'>
                     Connexion

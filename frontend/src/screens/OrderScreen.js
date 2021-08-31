@@ -109,7 +109,7 @@ const OrderScreen = ({ match, history }) => {
                   Livré le {order.deliveredAt}
                 </Message>
               ) : (
-                <Message variant="danger">Non livré</Message>
+                <Message variant="danger">Livraison en cours</Message>
               )}
             </ListGroup.Item>
 
