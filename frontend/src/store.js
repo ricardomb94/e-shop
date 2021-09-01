@@ -10,6 +10,7 @@ import {
   productDeleteReducer,
   productDetailsReducer,
   productListReducer,
+  productUpdateReducer,
 } from "./reducers/productReducer";
 import {
   userDeleteReducer,
@@ -30,6 +31,7 @@ const reducer = combineReducers({
   productDetails: productDetailsReducer,
   productDelete: productDeleteReducer,
   productCreate: productCreateReducer,
+  productUpdate: productUpdateReducer,
   cart: cartReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
@@ -62,8 +64,8 @@ const initialState = {
     shippingAddress: shippingAddressFromStorage,
   },
   userLogin: { userInfo: userInfoFromStorage },
-  userRegister: { userInfo: userInfoFromStorage },
-  userDetails: { userInfo: userInfoFromStorage },
+  // userRegister: { userInfo: userInfoFromStorage },
+  // userDetails: { userInfo: userInfoFromStorage },
 };
 
 const middleware = [thunk];

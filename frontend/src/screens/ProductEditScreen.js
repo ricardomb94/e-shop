@@ -7,6 +7,7 @@ import FormContainer from '../components/FormContainer'
 import { Link } from 'react-router-dom'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
+import { PRODUCT_UPDATE_RESET } from '../constants/productConstants'
 
 // import { PRODUCT_UPDATE_RESET } from '../constants/userConstants'
 
@@ -26,12 +27,18 @@ const ProductEditScreen = ({ match, history }) => {
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
 
+  const productUpdate = useSelector((state) => state.productUpdate);
+  const { loading:loadingUpdate, error: errorUpdate, success: successUpdate } = productUpdate;
+
   console.log('productDetails:',productDetails)
   console.log('PRODUCT :', product)
   console.log(typeof product)
 
   useEffect(() => {
-
+    if(successUpdate) {
+      dispatch({ type: PRODUCT_UPDATE_RESET})
+        history.push('/admin/productList')
+    }else{
       if (!product.name || product._id !== productId) {
         dispatch(listProductDetails(productId))
       } else {
@@ -43,12 +50,14 @@ const ProductEditScreen = ({ match, history }) => {
         setcountInStock(product.countInStock)
         setDescription(product.description)
       }
+    }
 
-  }, [dispatch, history, productId, product])
+
+  }, [dispatch, history, productId, product, successUpdate])
 
   const submitHandler = (e) => {
     e.preventDefault()
-    // dispatch(updateUser({ _id: userId, name, email, isAdmin }))
+     dispatch(updateProduct({ _id: productId, name, price, image, brand, category, countInStock, description }))
   }
 
   return (
@@ -58,8 +67,8 @@ const ProductEditScreen = ({ match, history }) => {
       </Link>
       <FormContainer>
         <h1>Edit Product</h1>
-        {/* {loadingUpdate && <Loader />}
-        {errorUpdate && <Message variant='danger'>{errorUpdate}</Message>} */}
+        {loadingUpdate && <Loader />}
+        {errorUpdate && <Message variant='danger'>{errorUpdate}</Message>}
         {loading ? (
           <Loader />
         ) : error ? (

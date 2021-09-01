@@ -74,7 +74,8 @@ const updateProduct = asyncHandler(async (req, res) =>{
   /**
    * Let's get from the body request object all necessary info
    */
-  const {name,
+  const {
+    name,
     price,
     description,
     image,
@@ -83,7 +84,7 @@ const updateProduct = asyncHandler(async (req, res) =>{
     countInStock
   } = req.body;
 
-  const product = await Product.findById(req.params.id)
+  const product = await  Product.findById(req.params.id)
 
   if(product){
     //Let's set all the product properties in the body
