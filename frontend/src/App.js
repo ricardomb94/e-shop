@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import Header from "./components//Header";
 import HomeScreen from "./screens/HomeScreen";
 import LoginScreen from "./screens/LoginScreen";
+import OrderListScreen from "./screens/OrderListScreen";
 import OrderScreen from "./screens/OrderScreen";
 import PaymentScreen from "./screens/PaymentScreen";
 import PlaceOrderScreen from "./screens/PlaceOrderScreen";
@@ -25,7 +26,8 @@ const App = () => {
       <Header />
       <main className="py-5">
         <Container>
-          <Route path="/orders/:id" component={OrderScreen} />
+          <Route path="/order/:id" component={OrderScreen} />
+          <Route path="/admin/orderlist" component={OrderListScreen} />
           <Route path="/shipping" component={ShippingScreen} />
           <Route path="/payement" component={PaymentScreen} />
           <Route path="/placeorder" component={PlaceOrderScreen} />

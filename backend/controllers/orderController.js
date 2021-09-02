@@ -88,4 +88,27 @@ const getMyOrders = asyncHandler(async (req, res) => {
   res.json(orders);
 });
 
-export { addOrderItems, getOrderById, updateOrderToPaid, getMyOrders };
+
+// @desc  Get all orders
+// @route GET /api/orders
+// @ccess Private/Admin
+const getOrders = asyncHandler(async (req, res) => {
+  const orders = await Order.find({ }).populate('user', 'id name');
+  res.json(orders);
+});
+
+// @desc  Delete order
+// @route DELETE /api/orders/:id
+// @ccess Private/Admin
+const deleteOrder = asyncHandler(async (req, res) => {
+  const order = await order.findById(req.params.id);
+
+  if (order) {
+    await order.remove();
+    res.json({ message: "Commande supprimé avec succès" });
+  } else {
+    res.status(404);
+    throw new Error("Commande non trouvée");
+  }
+});
+export { addOrderItems, getOrderById, updateOrderToPaid, getMyOrders, getOrders, deleteOrder };
