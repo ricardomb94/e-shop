@@ -58,7 +58,7 @@ const getOrderById = asyncHandler(async (req, res) => {
 });
 
 // @desc   Update order to paid
-// @route GET /api/orders/:id/pay
+// @route PUT /api/orders/:id/pay
 // @ccess Private
 
 const updateOrderToPaid = asyncHandler(async (req, res) => {
@@ -89,6 +89,25 @@ const getMyOrders = asyncHandler(async (req, res) => {
 });
 
 
+// @desc   Update order to delivered
+// @route PUT /api/orders/:id/deliver
+// @ccess Private/admin
+
+const updateOrderToDelivered = asyncHandler( async ( req, res ) => {
+  const order = await Order.findById( req.params.id );
+  if ( order ) {
+    order.isDelivered = true;
+    order.deliveredAt = Date.now();
+
+    const updatedOrder = await order.save();
+    res.json( updatedOrder );
+  } else {
+    res.status( 404 );
+    throw new Error( "Votre commande n'a pas abouti" );
+  }
+} );
+
+
 // @desc  Get all orders
 // @route GET /api/orders
 // @ccess Private/Admin
@@ -111,4 +130,12 @@ const deleteOrder = asyncHandler(async (req, res) => {
     throw new Error("Commande non trouvée");
   }
 });
-export { addOrderItems, getOrderById, updateOrderToPaid, getMyOrders, getOrders, deleteOrder };
+export {
+  addOrderItems,
+  getOrderById,
+  updateOrderToPaid,
+  updateOrderToDelivered,
+  getMyOrders,
+  getOrders,
+  deleteOrder
+};
