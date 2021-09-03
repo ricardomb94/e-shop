@@ -1,7 +1,7 @@
 import { applyMiddleware, combineReducers, createStore } from "redux";
 import {
   orderCreateReducer,
-  orderDeleteReducer,
+  orderDeliverReducer,
   orderDetailsReducer,
   orderLisMyReducer,
   orderListReducer,
@@ -44,8 +44,8 @@ const reducer = combineReducers({
   userDelete: userDeleteReducer,
   orderCreate: orderCreateReducer,
   orderDetails: orderDetailsReducer,
-  orderDelete:orderDeleteReducer,
   orderPay: orderPayReducer,
+  orderDeliver: orderDeliverReducer,
   orderListMy: orderLisMyReducer,
   orderList: orderListReducer,
 });

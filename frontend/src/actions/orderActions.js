@@ -1,10 +1,11 @@
 import {
   ORDER_CREATE_FAIL,
   ORDER_CREATE_REQUEST,
+  ORDER_CREATE_RESET,
   ORDER_CREATE_SUCCESS,
-  ORDER_DELETE_FAIL,
-  ORDER_DELETE_REQUEST,
-  ORDER_DELETE_SUCCESS,
+  ORDER_DELIVER_FAIL,
+  ORDER_DELIVER_REQUEST,
+  ORDER_DELIVER_SUCCESS,
   ORDER_DETAILS_FAIL,
   ORDER_DETAILS_REQUEST,
   ORDER_DETAILS_SUCCESS,
@@ -46,6 +47,13 @@ export const createOrder = order => async (dispatch, getState) => {
       type: ORDER_CREATE_SUCCESS,
       payload: data
     });
+    localStorage.removeItem( 'order' )
+
+    dispatch( {
+      type: ORDER_CREATE_RESET,
+      payload: data
+    } )
+
   } catch (error) {
     dispatch({
       type: ORDER_CREATE_FAIL,
@@ -55,6 +63,7 @@ export const createOrder = order => async (dispatch, getState) => {
           : error.message
     });
   }
+
 };
 
 export const getOrderDetails = id => async (dispatch, getState) => {
@@ -132,6 +141,42 @@ export const payOrder =
       });
     }
   };
+export const deliverOrder =
+  ( order ) => async ( dispatch, getState ) => {
+    try {
+      //Let's dispatching the state
+      dispatch( {
+        type: ORDER_DELIVER_REQUEST
+      } );
+
+      //That gives us access to login object containing user informations
+      const {
+        userLogin: { userInfo }
+      } = getState();
+
+      const config = {
+        headers: {
+          Authorization: `Bearer ${userInfo.token}`
+        }
+      };
+      const { data } = await axios.put(
+        `/api/orders/${order._id}/deliver`, {}, config );
+      console.log( data );
+
+      dispatch( {
+        type: ORDER_DELIVER_SUCCESS,
+        payload: data
+      } );
+    } catch ( error ) {
+      dispatch( {
+        type: ORDER_DELIVER_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
+      } );
+    }
+  };
 
 export const listMyOrders = () => async (dispatch, getState) => {
   try {
@@ -202,31 +247,3 @@ export const listOrders = () => async (dispatch, getState) => {
   }
 };
 
-export const deleteOrder = (id) => async (dispatch, getState) => {
-  try{
-      dispatch({type: ORDER_DELETE_REQUEST})
-
-      const {
-          userLogin: { userInfo},
-      } = getState();
-
-      const config = {
-          headers: {
-              Authorization: `Bearer ${userInfo.token}`,
-          }
-      }
-
-      await axios.delete(`/api/orders/${id}`, config)
-
-      dispatch({
-          type: ORDER_DELETE_SUCCESS,
-      })
-
-  }catch(error){
-      dispatch({
-          type: ORDER_DELETE_FAIL,
-          payload: error.response && error.response.data.message ? error.response.data.message
-          :error.message,
-      })
-  }
-}
