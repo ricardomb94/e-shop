@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { LinkContainer } from "react-router-bootstrap";
 import React from "react";
+import { Route } from "react-router-dom"
+import SearchBox from './SearchBox'
 import { logout } from "../actions/usersActions";
 
 const Header = () => {
@@ -15,14 +17,14 @@ const Header = () => {
   };
   return (
     <header>
-      <Navbar bg="success" variant="dark" expand="lg" collapseOnSelect>
+      <Navbar bg="success custom_header" variant="dark" expand="lg" collapseOnSelect>
         <Container>
           <LinkContainer to="/">
             <Navbar.Brand>KIVANI</Navbar.Brand>
           </LinkContainer>
-
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
+            <Route render={( { history } ) => <SearchBox history={history} />} />
             <Nav className="ml-auto">
               <LinkContainer to="/cart">
                 <Nav.Link>

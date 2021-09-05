@@ -22,3 +22,10 @@ h2 {
 .rating span {
   margin: 0.1rem;
 }
+.custom_header {
+  background: #07741e !important;
+}
+
+.search_button {
+  background: rgb(10, 128, 238) !important;
+}
