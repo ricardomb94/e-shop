@@ -17,7 +17,7 @@ const Header = () => {
   };
   return (
     <header>
-      <Navbar bg="success custom_header" variant="dark" expand="lg" collapseOnSelect>
+      <Navbar bg="success green-kivani" variant="dark" expand="lg" collapseOnSelect>
         <Container>
           <LinkContainer to="/">
             <Navbar.Brand>KIVANI</Navbar.Brand>
