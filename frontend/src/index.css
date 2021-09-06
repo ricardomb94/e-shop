@@ -29,3 +29,44 @@ h2 {
 .search_button {
   background: rgb(10, 128, 238) !important;
 }
+.custom-blue {
+  background: #181353 !important;
+}
+
+/* carousel */
+.carousel-item-next,
+.carousel-item-prev,
+.carousel-item.active {
+  display: flex;
+}
+
+.carousel-caption {
+  position: absolute;
+  top: 0;
+}
+
+.carousel-caption h2 {
+  color: #fff;
+}
+
+.carousel img {
+  background: #07741e;
+  height: 550px;
+  padding: 10px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  border-radius: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  border: 20px solid #fff;
+}
+
+.carousel a {
+  margin: 0 auto;
+}
+
+@media (max-width: 900px) {
+  .carousel-caption h2 {
+    font-size: 2.5vw;
+  }
+}

@@ -16,7 +16,7 @@ const Product = ({ product }) => {
           </Card.Title>
         </Link>
         <Card.Text as="h3" className="text-center">{product.price}$<Link to={`/product/${product._id}`}>
-          <Button variant="dark rounded" className="ml-5">Buy article</Button>
+          <Button variant="dark custom-blue rounded" className="shadow-lg ml-5">Order know</Button>
         </Link></Card.Text>
 
         <hr />

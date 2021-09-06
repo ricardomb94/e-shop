@@ -6,7 +6,7 @@ import asyncHandler from 'express-async-handler';
 // @ccess Public: no token needed
 const getProducts = asyncHandler(async (req, res) =>{
 
-  const pageSize = 2
+  const pageSize = 6
   const page = Number( req.query.pageNumber ) || 1
 
   const keyword = req.query.keyword ? {
@@ -122,6 +122,7 @@ const updateProduct = asyncHandler(async (req, res) =>{
   }
 
 })
+
 // @desc Create a new review
 // @route POST /api/products/:id/review
 // @ccess Private
@@ -166,6 +167,13 @@ const createProductReview = asyncHandler( async ( req, res ) => {
   }
 
 } )
+// @desc Get top rated products
+// @route GET /api/products/top
+// @ccess Private
+const getTopProducts = asyncHandler( async ( req, res ) => {
+  const products = await Product.find( {} ).sort( { rating: -1 } ).limit( 3 )
+  res.json( products )
+} )
 
 export {
     getProducts,
@@ -173,6 +181,6 @@ export {
     deleteProduct,
     createProduct,
     updateProduct,
-  createProductReview
-
+  createProductReview,
+  getTopProducts,
 }
