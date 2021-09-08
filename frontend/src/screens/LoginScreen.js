@@ -37,10 +37,10 @@ const LoginScreen = ({location, history}) => {
             {loading && <Loader />}
             <Form onSubmit={submitHandler}>
                 <Form.Group controlId='email'>
-                <Form.Label>Adresse E-mail</Form.Label>
+                    <Form.Label>Email Adress</Form.Label>
                 <Form.Control
                     type='email'
-                    placeholder='Renseignez votre e-mail'
+                        placeholder='Enter your email'
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     >
@@ -48,11 +48,11 @@ const LoginScreen = ({location, history}) => {
                 </Form.Group>
 
                  <Form.Group controlId='password'>
-                <Form.Label>Mot de passe</Form.Label>
+                    <Form.Label>Password</Form.Label>
                 <Form.Control
 
                     type='password'
-                    plaholder='Renseignez votre mot de passe'
+                        plaholder='Enter your password'
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     >
@@ -66,7 +66,7 @@ const LoginScreen = ({location, history}) => {
                 <Col>
                     Nouveau?{''}
                     <Link to={redirect ? `/register?redirect=${redirect}`: '/register'}>
-                        Créer un compte
+                        Create an account
                     </Link>
                 </Col>
             </Row>

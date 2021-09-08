@@ -1,10 +1,11 @@
-import React, {useState, useEffect} from 'react'
-import {Link} from 'react-router-dom'
-import {Form, Button, Row, Col} from 'react-bootstrap'
+import { Button, Col, Form, Row } from 'react-bootstrap'
+import React, { useEffect, useState } from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import Message from '../components/Message'
-import Loader from '../components/Loader'
+
 import FormContainer from '../components/FormContainer'
+import { Link } from 'react-router-dom'
+import Loader from '../components/Loader'
+import Message from '../components/Message'
 import {register} from '../actions/usersActions'
 
 const RegisterScreen = ({location, history}) => {
@@ -23,7 +24,7 @@ const RegisterScreen = ({location, history}) => {
     const redirect = location.search ? location.search.split('=')[1]: '/'
     useEffect(() => {
         if (userInfo){
-           history.push(redirect) 
+            history.push( redirect )
         }
 
     }, [history, userInfo, redirect])
@@ -35,7 +36,7 @@ const RegisterScreen = ({location, history}) => {
         }else{
             dispatch(register(name, email, password))
         }
-        
+
     }
     return (
         <FormContainer>
@@ -45,56 +46,56 @@ const RegisterScreen = ({location, history}) => {
             {loading && <Loader />}
             <Form onSubmit={submitHandler}>
             <Form.Group controlId='name'>
-                <Form.Label>Votre Nom</Form.Label>
-                <Form.Control 
-                    type='name' 
-                    placeholder='Renseignez votre nom'
+                    <Form.Label>Your name</Form.Label>
+                    <Form.Control
+                        type='name'
+                        placeholder='Enter your name'
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     >
-                    </Form.Control> 
+                    </Form.Control>
                 </Form.Group>
 
                 <Form.Group controlId='email'>
-                <Form.Label>Adresse E-mail</Form.Label>
-                <Form.Control 
-                    type='email' 
-                    placeholder='Renseignez votre e-mail'
+                    <Form.Label>Email adress</Form.Label>
+                    <Form.Control
+                        type='email'
+                        placeholder='Enter your email adress'
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     >
-                    </Form.Control> 
+                    </Form.Control>
                 </Form.Group>
 
                  <Form.Group controlId='password'>
-                <Form.Label>Mot de passe</Form.Label>
-                <Form.Control 
-                    type='password' 
-                    plaholder='Renseignez votre mot de passe'
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control
+                        type='password'
+                        plaholder='Enter your email password'
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     >
-                    </Form.Control> 
+                    </Form.Control>
                 </Form.Group>
                 <Form.Group controlId='confirmPassword'>
-                <Form.Label>Confirmez votre mot de passe</Form.Label>
-                <Form.Control 
-                    type='password' 
-                    plaholder='Confirmez votre mot de passe'
+                    <Form.Label>Confirm your password</Form.Label>
+                    <Form.Control
+                        type='password'
+                        plaholder='Confirm your passeword'
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     >
-                    </Form.Control> 
+                    </Form.Control>
                 </Form.Group>
                 <Button type='submit' variant='primary'>
-                    Enregistrement
+                    Register
                 </Button>
             </Form>
             <Row className='py-3'>
                 <Col>
-                    Vous avez déja un compte?{''}
+                    Already have an account?{''}
                     <Link to={redirect ? `/login?redirect=${redirect}`: '/login'}>
-                        Connectez-vous
+                        Sign in
                     </Link>
                 </Col>
             </Row>
