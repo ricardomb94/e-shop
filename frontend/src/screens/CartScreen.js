@@ -1,17 +1,18 @@
-import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import {
-  Row,
-  Col,
-  ListGroup,
-  Image,
-  Form,
   Button,
   Card,
+  Col,
+  Form,
+  Image,
+  ListGroup,
+  Row,
 } from "react-bootstrap";
-import Message from "../components/Message";
+import React, { useEffect } from "react";
 import { addToCart, removeFromCart } from "../actions/cartActions";
+import { useDispatch, useSelector } from "react-redux";
+
+import { Link } from "react-router-dom";
+import Message from "../components/Message";
 
 const CartScreen = ({ match, location, history }) => {
   const productId = match.params.id;
@@ -40,10 +41,10 @@ const CartScreen = ({ match, location, history }) => {
   return (
     <Row>
       <Col md={8}>
-        <h1>Panier</h1>
+        <h1>Cart</h1>
         {cartItems.length === 0 ? (
           <Message>
-            Votre panier est vide. <Link to="/">Retour à la boutique</Link>
+            Your cart is empty. <Link to="/">Go to the shop please</Link>
           </Message>
         ) : (
           <ListGroup variant="flush">
@@ -109,7 +110,7 @@ const CartScreen = ({ match, location, history }) => {
                 disabled={cartItems.length === 0}
                 onClick={checkoutHandler}
               >
-                Valider la commande
+                Validate order
               </Button>
             </ListGroup.Item>
           </ListGroup>
