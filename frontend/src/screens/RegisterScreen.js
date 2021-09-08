@@ -40,7 +40,7 @@ const RegisterScreen = ({location, history}) => {
     }
     return (
         <FormContainer>
-            <h1>Enregistrement</h1>
+            <h1>Register</h1>
             {message && <Message variant='danger'>{message}</Message>}
             {error && <Message variant='danger'>{error}</Message>}
             {loading && <Loader />}

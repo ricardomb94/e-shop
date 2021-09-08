@@ -32,7 +32,7 @@ const LoginScreen = ({location, history}) => {
     }
     return (
         <FormContainer>
-            <h1>Connexion</h1>
+            <h1>Sign in</h1>
             {error && <Message variant='danger'>{error}</Message>}
             {loading && <Loader />}
             <Form onSubmit={submitHandler}>
@@ -49,8 +49,7 @@ const LoginScreen = ({location, history}) => {
 
                  <Form.Group controlId='password'>
                     <Form.Label>Password</Form.Label>
-                <Form.Control
-
+                    <Form.Control
                     type='password'
                         plaholder='Enter your password'
                     value={password}
@@ -64,7 +63,7 @@ const LoginScreen = ({location, history}) => {
             </Form>
             <Row className='py-3'>
                 <Col>
-                    Nouveau?{''}
+                    New?{''}
                     <Link to={redirect ? `/register?redirect=${redirect}`: '/register'}>
                         Create an account
                     </Link>
