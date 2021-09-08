@@ -28,7 +28,7 @@ const Header = () => {
             <Nav className="ml-auto">
               <LinkContainer to="/cart">
                 <Nav.Link>
-                  <i className="fas fa-shopping-cart"></i>Panier
+                  <i className="fas fa-shopping-cart"></i>Cart
                 </Nav.Link>
               </LinkContainer>
               {userInfo ? (
@@ -37,26 +37,26 @@ const Header = () => {
                     <NavDropdown.Item>Profile</NavDropdown.Item>
                   </LinkContainer>
                   <NavDropdown.Item onClick={logoutHandler}>
-                    Se déconnecter
+                    Log out
                   </NavDropdown.Item>
                 </NavDropdown>
               ) : (
                 <LinkContainer to="/login">
                   <Nav.Link>
-                    <i className="fas fa-user"></i>Se connecter
+                      <i className="fas fa-user"></i>Sign in
                   </Nav.Link>
                 </LinkContainer>
               )}
               {userInfo && userInfo.isAdmin && (
                 <NavDropdown title="Admin" id="adminmenu">
                   <LinkContainer to="/admin/userlist">
-                    <NavDropdown.Item>Clients</NavDropdown.Item>
+                    <NavDropdown.Item>Customer</NavDropdown.Item>
                   </LinkContainer>
                   <LinkContainer to="/admin/productlist">
-                    <NavDropdown.Item>Produits</NavDropdown.Item>
+                    <NavDropdown.Item>Products</NavDropdown.Item>
                   </LinkContainer>
                   <LinkContainer to="/admin/orderlist">
-                    <NavDropdown.Item>Commandes</NavDropdown.Item>
+                    <NavDropdown.Item>Orders</NavDropdown.Item>
                   </LinkContainer>
                 </NavDropdown>
               )}
