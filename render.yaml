@@ -32,10 +32,3 @@ services:
       name: uploads
       mountPath: ./uploads
       sizeGB: 5
-
-databases:
-  # The MongoDB instance is external (MongoDB Atlas)
-  # This is just a note, not actual configuration
-  - external: true
-    name: mongodb-atlas
-
