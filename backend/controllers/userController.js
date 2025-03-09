@@ -10,11 +10,20 @@ const authUser = asyncHandler(async (req, res) => {
 
   //We are going to await and take our User Model and
   //find one document by email
-  const user = await User.findOne({ email });
+  const user = await User.findOne({ email }).select("+password");
+
+  if(!user) {
+    res.status(401);
+    throw new Error("Email invalide");
+  }
 
   //Here we check if user exist and also if the password
   //that sent matches that user's password in db
-  if (user && (await user.matchPassword(password))) {
+  const isMatch = await user.matchPassword(password);
+  if(!isMatch) {
+    res.status(401);
+    throw new Error("Mot de passe invalide");
+  }
     res.json({
       _id: user._id,
       name: user.name,
@@ -22,12 +31,6 @@ const authUser = asyncHandler(async (req, res) => {
       isAdmin: user.isAdmin,
       token: generateToken(user._id),
     });
-    //If user does not exist or password is incorrect
-    //We throw an error and return a JSON with status of 401
-  } else {
-    res.status(401);
-    throw new Error("Email ou mot de passe invalide");
-  }
 });
 
 // @desc Register a new user
@@ -64,17 +67,15 @@ const registerUser = asyncHandler(async (req, res) => {
 // @route GET /api/users/profile
 // @ccess Private
 const getUserProfile = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.user._id);
+  const user = await User.findById(req.user._id)
+    .select('name email isAdmin -_id')
+    .lean();
 
   if (user) {
-    res.json({
-      _id: user._id,
-      name: user.name,
-      email: user.email,
-      isAdmin: user.isAdmin,
-    });
+    res.json(user);
   } else {
     res.status(404);
+    throw new Error("User not found");
   }
 });
 
@@ -82,17 +83,19 @@ const getUserProfile = asyncHandler(async (req, res) => {
 // @route PUT /api/users/profile
 // @ccess Private
 const updateUserProfile = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.user._id);
+  const updatedUser = await User.findOneAndUpdate(
+    { _id: req.user._id },
+    {
+      $set: {
+        name: req.body.name,
+        email: req.body.email,
+        password: req.body.password ? req.body.password : undefined
+      }
+    },
+    { new: true, runValidators: true }
+  );
 
-  if (user) {
-    user.name = req.body.name || user.name;
-    user.email = req.body.email || user.email;
-    if (req.body.password) {
-      user.password = req.body.password;
-    }
-
-    const updatedUser = await user.save();
-
+  if (updatedUser) {
     res.json({
       _id: updatedUser._id,
       name: updatedUser.name,
@@ -102,7 +105,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     });
   } else {
     res.status(404);
-    throw new error("User not found");
+    throw new Error("User not found");
   }
 });
 
@@ -119,10 +122,8 @@ const getUsers = asyncHandler(async (req, res) => {
 // @route DELETE /api/users/:id
 // @ccess Private/Admin
 const deleteUser = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.params.id);
-
-  if (user) {
-    await user.remove();
+  const result = await User.deleteOne({ _id: req.params.id });
+  if (result.deletedCount > 0) {
     res.json({ message: "Utilisateur supprimé avec succès" });
   } else {
     res.status(404);
