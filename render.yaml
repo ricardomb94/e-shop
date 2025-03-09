@@ -1,0 +1,41 @@
+services:
+  - type: web
+    name: e-shop
+    env: node
+    plan: starter
+    buildCommand: npm install && npm install --prefix frontend && npm run build --prefix frontend
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 5000
+      - key: MONGO_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: JWT_REFRESH_SECRET
+        sync: false
+      - key: PAYPAL_CLIENT_ID
+        sync: false
+      - key: CLOUDINARY_URL
+        sync: false
+      - key: CLOUDINARY_CLOUD_NAME
+        sync: false
+      - key: CLOUDINARY_API_KEY
+        sync: false
+      - key: CLOUDINARY_API_SECRET
+        sync: false
+      - key: CORS_ORIGIN
+        value: "https://e-shop.onrender.com,https://www.yourdomain.com"
+    disk:
+      name: uploads
+      mountPath: ./uploads
+      sizeGB: 5
+
+databases:
+  # The MongoDB instance is external (MongoDB Atlas)
+  # This is just a note, not actual configuration
+  - external: true
+    name: mongodb-atlas
+

@@ -13,7 +13,10 @@ import userRoutes from './routes/userRoutes.js'
 
 dotenv.config()
 
-connectDB()
+// Connect to MongoDB
+connectDB().catch(err => {
+  console.error(`Error connecting to MongoDB: ${err.message}`.red.bold)
+})
 
 const app = express()
 
@@ -29,7 +32,7 @@ app.use('/api/orders', orderRoutes)
 app.use('/api/upload', uploadRoutes)
 
 app.get('/api/config/paypal', (req, res) =>
-  res.send( process.env.PAYPAL_CLIENT )
+  res.send(process.env.PAYPAL_CLIENT)
 )
 
 const __dirname = path.resolve()
