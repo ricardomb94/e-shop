@@ -76,6 +76,55 @@ const ProductEditScreen = ({ match, history }) => {
     }
   }
 
+
+
+//   const uploadFileHandler = async (e) => {
+//   const file = e.target.files[0]
+//   const formData = new FormData()
+//   formData.append('image', file)
+//   setUploading(true)
+
+//   //Define allowed file types
+//   const validTypes = ['image/jpeg', 'image/jpg', 'image/png']
+//   const maxSize = 5 * 1024 * 1024 // 5MB
+
+//   try {
+//     // Check file type validation
+//     if (!validTypes.includes(file.type)) {
+//       throw new Error('Invalid file type. Only JPEG, JPG and PNG files are allowed.')
+//     }
+//     // Check file size validation
+//     if (file.size > maxSize) {
+//       throw new Error('File is too large. Please upload a file smaller than 5MB.')
+//     }
+//     const config = {
+//       headers: {
+//         'Content-Type': 'multipart/form-data',
+//       },
+//       validateStatus: status => status < 500
+//     }
+
+//     const { data } = await axios.post('/api/uploads', formData, config)
+
+//     setImage(data)
+//     setUploading(false)
+//   } catch (error) {
+//     const errorMessage = error.response?.data?.message || error.message
+//     console.log('Upload error details:', {
+//       status: error.response?.status,
+//       message: errorMessage,
+//       fileName: file.name,
+//       fileSize: file.size,
+//       fileType: file.type
+//     })
+//     setUploading(false)
+//     // You can add a state to show error message to user
+//     // setError('')
+  
+//   }
+// }
+
+
   const submitHandler = (e) => {
     e.preventDefault()
     dispatch(
@@ -141,6 +190,7 @@ const ProductEditScreen = ({ match, history }) => {
                 custom
                 onChange={uploadFileHandler}
               ></Form.File>
+              <small className='text-muted'>Accepted formats: JPG, JPEG, PNG (max 5MB)</small>
               {uploading && <Loader />}
             </Form.Group>
 

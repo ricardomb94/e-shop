@@ -11,8 +11,8 @@
   "scripts": {
     "start": "node backend/server",
     "server": "nodemon backend/server",
-    "client": "yarn --cwd ./frontend run start",
-    "dev": "concurrently \"yarn run server\" \"yarn run client\"",
+    "client": "NODE_OPTIONS=--openssl-legacy-provider yarn --cwd ./frontend run start",
+    "dev": "concurrently \"yarn run server\" \"NODE_OPTIONS=--openssl-legacy-provider yarn run client\"",
     "data:import": "node backend/seeder",
     "data:destroy": "node backend/seeder -d",
     "render-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend",

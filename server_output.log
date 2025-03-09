@@ -1,0 +1,50 @@
+[1m[33mServer running in development mode on port 5000[39m[22m
+[1m[4m[36mMongoDB Connected: ac-3epoehk-shard-00-02.bnpgltz.mongodb.net[39m[24m[22m
+[0mPOST /api/upload [32m200[0m 23.038 ms - 33[0m
+[0mGET /api/products/top [36m304[0m 124.367 ms - -[0m
+[0mGET /api/products?keyword=&pageNumber=1 [36m304[0m 204.985 ms - -[0m
+[0mGET /api/products/top [36m304[0m 100.425 ms - -[0m
+[0mGET /api/products?keyword=&pageNumber=2 [32m200[0m 195.710 ms - 718[0m
+[0mGET /images/sample.jpg [33m404[0m 1.712 ms - 44[0m
+[0mGET /api/products?keyword=&pageNumber=1 [36m304[0m 194.528 ms - -[0m
+[0mGET /api/products?keyword=&pageNumber=2 [36m304[0m 194.604 ms - -[0m
+[0mDELETE /api/products/67ce0ad5f6915d6d367bc81e [32m200[0m 310.236 ms - 44[0m
+[0mGET /api/products?keyword=&pageNumber=2 [32m200[0m 190.884 ms - 367[0m
+[0mGET /api/products/67cd8d7b4af823efa695bd48 [32m200[0m 97.425 ms - 333[0m
+File type validation error: DALL·E 2024-10-30 20.57.21 - Abstract vector logo design for 'MBK,' inspired by Bauhaus with minimal shapes and clean angles. The design uses bold colors, balanced negative space,.webp is not a valid image file. Only JPG, JPEG, and PNG files are allowed.
+Multer upload error: undefined {
+  stack: undefined,
+  filePath: 'No file path available',
+  uploadDirectory: '/home/agnes/Ricardo/REACT-PROJECTS/e-shop/uploads/',
+  errorCode: undefined
+}
+[0mPOST /api/upload [31m500[0m 7.898 ms - 32[0m
+[0mPUT /api/products/67cd8d7b4af823efa695bd48 [32m201[0m 316.116 ms - 333[0m
+[0mGET /api/products?keyword=&pageNumber=1 [36m304[0m 192.595 ms - -[0m
+[0mGET /api/products?keyword=&pageNumber=2 [36m304[0m 198.515 ms - -[0m
+[0mGET /images/sample.jpg [33m404[0m 0.973 ms - 44[0m
+[0mGET /api/products/top [36m304[0m 97.035 ms - -[0m
+[0mGET /api/products?keyword=&pageNumber=1 [36m304[0m 191.805 ms - -[0m
+[0mGET /api/products?keyword=&pageNumber=1 [36m304[0m 198.741 ms - -[0m
+[0mGET /api/products?keyword=&pageNumber=2 [36m304[0m 201.702 ms - -[0m
+File type validation error: DALL·E 2024-10-30 20.57.21 - Abstract vector logo design for 'MBK,' inspired by Bauhaus with minimal shapes and clean angles. The design uses bold colors, balanced negative space,.webp is not a valid image file. Only JPG, JPEG, and PNG files are allowed.
+Multer upload error: undefined {
+  stack: undefined,
+  filePath: 'No file path available',
+  uploadDirectory: '/home/agnes/Ricardo/REACT-PROJECTS/e-shop/uploads/',
+  errorCode: undefined
+}
+[0mPOST /api/upload [31m500[0m 4.809 ms - 32[0m
+[0mGET /api/products/top [36m304[0m 99.686 ms - -[0m
+[0mGET /api/products?keyword=&pageNumber=1 [36m304[0m 189.711 ms - -[0m
+[0mGET /api/products?keyword=&pageNumber=1 [36m304[0m 191.285 ms - -[0m
+[0mGET /api/products?keyword=&pageNumber=2 [36m304[0m 190.649 ms - -[0m
+[0mGET /api/products/67cd8d7b4af823efa695bd48 [32m200[0m 97.166 ms - 333[0m
+File type validation error: DALL·E 2024-10-30 20.57.21 - Abstract vector logo design for 'MBK,' inspired by Bauhaus with minimal shapes and clean angles. The design uses bold colors, balanced negative space,.webp is not a valid image file. Only JPG, JPEG, and PNG files are allowed.
+Multer upload error: undefined {
+  stack: undefined,
+  filePath: 'No file path available',
+  uploadDirectory: '/home/agnes/Ricardo/REACT-PROJECTS/e-shop/uploads/',
+  errorCode: undefined
+}
+[0mPOST /api/upload [31m500[0m 5.544 ms - 32[0m
