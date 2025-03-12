@@ -29,3 +29,4 @@ yarn-error.log*
 # uploads
 uploads/*
 !uploads/.gitkeep
+.qodo
